@@ -3,7 +3,7 @@
 //  All state management, API calls, rendering, and mascot logic
 // ══════════════════════════════════════════════════════════════
 
-const API = '/api';
+const API = 'https://pqc-scanner-zle8.onrender.com';
 
 // ── State ────────────────────────────────────────────────────
 let state = {
