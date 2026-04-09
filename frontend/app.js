@@ -60,8 +60,17 @@ async function login(username, password) {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, password })
   });
-  const d = await r.json();
-  if (!r.ok) return d.detail || 'Login failed';
+ let d = {};
+try {
+  d = await r.json();
+} catch (e) {
+  console.error("Invalid JSON response", e);
+  return "Server error (invalid response)";
+}
+
+if (!r.ok) {
+  return d.detail || "Login failed";
+}
   const usr = { id: d.user_id, username: d.username, email: d.email, is_admin: d.is_admin };
   localStorage.setItem('pqc_token', d.access_token);
   localStorage.setItem('pqc_user', JSON.stringify(usr));
@@ -75,8 +84,17 @@ async function register(username, email, password, full_name) {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, email, password, full_name })
   });
-  const d = await r.json();
-  if (!r.ok) return d.detail || 'Registration failed';
+  let d = {};
+try {
+  d = await r.json();
+} catch (e) {
+  console.error("Invalid JSON response", e);
+  return "Server error (invalid response)";
+}
+
+if (!r.ok) {
+  return d.detail || "Login failed";
+}
   const usr = { id: d.user_id, username: d.username, email: d.email, is_admin: d.is_admin };
   localStorage.setItem('pqc_token', d.access_token);
   localStorage.setItem('pqc_user', JSON.stringify(usr));
