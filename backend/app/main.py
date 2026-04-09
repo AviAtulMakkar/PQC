@@ -49,6 +49,9 @@ async def startup():
 async def shutdown():
     await scheduler.stop()
 
+@app.get("/")
+def home():
+    return {"message": "Backend is live 🚀"}
 
 # ══════════════════════════════════════════════════════════════
 #  AUTH
